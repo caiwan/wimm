@@ -40,6 +40,10 @@ lives here: [https://github.com/slapec/wimm-vue](https://github.com/slapec/wimm-
 
 4.  Start the application
 
+    ```
+    ptython manage.py runserver
+    ```
+
 ## Details
 
 WIMM is a dead simple application. I think an Excel spreadsheet
