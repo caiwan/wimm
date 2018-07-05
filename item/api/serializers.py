@@ -4,7 +4,7 @@ from rest_framework.serializers import ModelSerializer
 from taggit_serializer.serializers import TagListSerializerField, TaggitSerializer
 
 from item.models import Item
-
+from taggit.models import Tag
 
 class ItemSerializer(TaggitSerializer, ModelSerializer):
     tags = TagListSerializerField()

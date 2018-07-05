@@ -18,7 +18,6 @@ from taggit.models import Tag
 from item.api.serializers import ItemSerializer
 from item.models import Item, TaggedItem
 
-
 class Items(ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
@@ -159,3 +158,13 @@ class TagSum(ViewSet):
         qs = qs.annotate(sum_price=Sum('item__price')).order_by(negativeFirst)[:tagCount]
 
         return Response((_.name, _.sum_price) for _ in qs)
+
+
+class Tags(ViewSet):
+    def list(self, request):
+        tag_list = []
+        for tag in Tag.objects.all():
+            tag_list.append({
+                'name' : tag.name
+            })
+        return Response(tag_list)
