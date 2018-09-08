@@ -92,7 +92,7 @@ class Items(ModelViewSet):
 
 class ItemsUpload(APIView):
     def post(self, request, format=None):
-        text = request.data['file'].read().decode()
+        text = request.data['file'].read().decode(errors='replace')
 
         reader = csv.DictReader(io.StringIO(text), delimiter=',')
         counter = 0
