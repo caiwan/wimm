@@ -92,7 +92,10 @@ class Items(ModelViewSet):
 
 class ItemsUpload(APIView):
     def post(self, request, format=None):
-        text = request.data['file'].read().decode(errors='replace')
+        # text = unicode(request.data['file'].read(), 'utf-8')
+        text = request.data['file'].read().decode(encoding='UTF-8',errors='strict')
+
+        print(type(text))
 
         reader = csv.DictReader(io.StringIO(text), delimiter=',')
         counter = 0
@@ -106,7 +109,6 @@ class ItemsUpload(APIView):
                         date=item['date'],
                         price=float(item['price']),
                     )
-
                     model.tags.add(*tags)
 
                     counter += 1
