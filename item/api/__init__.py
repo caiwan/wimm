@@ -11,7 +11,6 @@ api.register(r'autocomplete', Autocomplete, 'autocomplete')
 api.register(r'total_sum', TotalSum, 'total_sum')
 api.register(r'tag_sum', TagSum, 'tag_sum')
 
-
 urlpatterns = [
     url(r'^upload/$', ItemsUpload.as_view())
 ]
