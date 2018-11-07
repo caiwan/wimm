@@ -10,8 +10,31 @@ from rest_framework.viewsets import ModelViewSet, ViewSet
 
 from smartimport.processors import dispatch as DispatchProcess
 from smartimport.models import RawItem
+from smartimport.api.serializers import RawItemSerializer
 
-class Import(ModelViewSet):
+class ItemPopulate(ModelViewSet):
+    queryset = RawItem.objects.all()
+    serializer_class = RawItemSerializer
+
+    def filter_queryset(self, qs):
+        qs = qs.filter(item=None)
+        return qs
+
+    def list(self):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        date_item_list = []
+
+        print(serializer.data)
+
+        pass
+
+    def create(self):
+        pass
+
+    def delete(self):
+        pass
+
     pass
 
 class Upload(APIView):

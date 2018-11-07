@@ -11,7 +11,8 @@ class BaseParser:
 PARSERS = {
     '1': 'otp',
     '2': 'regular',
-    '3': 'mixed'
+    '3': 'mixed',
+    '4': 'raw'
 }
 
 def dispatch(type):

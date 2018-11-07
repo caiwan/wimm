@@ -11,15 +11,15 @@ from smartimport.models import RawItem
 class TestSmartImportOTP(TestCase):
 
     def test_import_csv(self):
-        client = Client()
         # given 
-        with open('./smartimport/tests/data/otp.csv') as infile:
+        with open('./smartimport/tests/data/raw.csv') as infile:
+            client = Client()
             headers = {'content-type': 'multipart/form-data'}
             csv_file = ContentFile(infile.read()) # Propbaly there's a more elegant method
             csv_file.name = "Untitled.csv"
 
             # when
-            response = client.post('/api/smartimport/upload/', data={"file":csv_file, 'type':1}, headers=headers)
+            response = client.post('/api/smartimport/upload/', data={"file":csv_file, 'type':4}, headers=headers)
             self.assertEqual(200, response.status_code)
 
             responseBody = response.json()

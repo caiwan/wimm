@@ -3,7 +3,7 @@ from dateutil.parser import parse as parse_date
 
 from smartimport.processors import BaseParser
 
-class OtpParser(BaseParser):
+class RawParser(BaseParser):
     def __init__(self):
         pass
     pass
@@ -13,12 +13,12 @@ class OtpParser(BaseParser):
         return row
 
     def _read_csv(self,utf8_data, dialect=csv.excel, **kwargs):
-        csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
+        csv_reader = csv.DictReader(utf8_data, dialect=dialect, **kwargs)
         for row in csv_reader:
             yield {
-                'date': parse_date(row[4]),
-                'price': float(row[2]),
-                'text': " ".join((row[8], row[9], row[12])).strip(),
+                'date': parse_date(row['date']),
+                'price': float(row['price']),
+                'text': row['tags'].strip(),
                 'tags': []
             }
 
@@ -31,4 +31,4 @@ class OtpParser(BaseParser):
 
 
 def dispatch():
-    return OtpParser()
+    return RawParser()
